@@ -66,9 +66,11 @@ class Vehicle
 
         $query = $this->db->prepare('INSERT INTO vehiculos(marca,modelo,matricula,precio_dia,imagen) VALUES (?,?,?,?,?)');
         $query->execute([$brand, $year, $licensePlate, $price, $image]);
+        $id = $this->db->lastInsertId();
+        return $this->getVehicleById($id);
     }
 
-    function updateCar($id, $brand, $year, $licensePlate, $price, $image)
+    function updateVehicle($id, $brand, $year, $licensePlate, $price, $image)
     {
 
         $query = $this->db->prepare("UPDATE vehiculos SET  marca = ?, modelo = ?, matricula = ?, precio_dia = ?, imagen = ? WHERE vehiculos.id = ?");
