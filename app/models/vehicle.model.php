@@ -16,13 +16,21 @@ class Vehicle
             return new PDO("mysql:host=" . MYSQL_HOST . ";dbname=" . MYSQL_DB . ";charset=utf8", MYSQL_USER, MYSQL_PASS);
     }
 
-    function getAllVehicles()
-    {
-            $query = $this->db->prepare('SELECT * FROM vehiculos');
-            $query->execute();
+    function getAllVehicles($OrderBy)
+    {       
+        $sql = 'SELECT * FROM vehiculos';
+        if ($OrderBy){
+            switch($OrderBy){
+               case 'year' : $sql .= ' ORDER BY modelo'; break;
+               case 'brand' : $sql .= ' ORDER BY marca'; break;
+               case 'price' : $sql .= ' ORDER BY precio_dia'; break;
+            }
+        }
+        $query = $this->db->prepare($sql);
+        $query->execute();
 
-            $vehicles = $query->fetchAll(PDO::FETCH_OBJ);
-            return $vehicles;
+        $vehicles = $query->fetchAll(PDO::FETCH_OBJ);
+        return $vehicles;
 
     }
 

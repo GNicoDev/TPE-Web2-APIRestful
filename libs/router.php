@@ -1,7 +1,7 @@
 <?php
 
-require_once './libs/request.php';
-require_once './libs/response.php';
+require_once 'request.php';
+require_once 'response.libs.php';
 
 class Route {
     private $url;
@@ -39,6 +39,7 @@ class Route {
     public function run($request, $response){
         $controller = $this->controller;  
         $method = $this->method;
+        
         $request->params = (object) $this->params;
        
         (new $controller())->$method($request, $response);

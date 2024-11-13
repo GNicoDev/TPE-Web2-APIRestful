@@ -2,11 +2,11 @@
 
     class JSONView{
 
-        public function response($body, $status = 200){
+        public function response($data, $status = 200){
             header("Content-Type: application/json");
             $statusText = $this->_requestStatus($status);
             header("HTTP/1.1 $status $statusText");
-            echo  json_encode($body);
+            echo  json_encode($data);
         }
 
         private function _requestStatus($code){
