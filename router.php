@@ -6,10 +6,10 @@ require_once 'app/controllers/vehicle.api.controller.php';
 
      #                  endpoint       verb            controller                method
     $router->addRoute("vehicles",     "GET",         "VehicleController",       "getAll");
-    $router->addRoute("vehicle/:id",  "GET",        "VehicleController",        "get");
-    $router->addRoute("vehicle/:id",  "DELETE",     "VehicleController",        "delete");
-    $router->addRoute("vehicle",      "POST",        "VehicleController",       "create");
-    $router->addRoute("vehicle/:id",  "PUT",        "VehicleController",        "update");
+    $router->addRoute("vehicles/:id",  "GET",        "VehicleController",        "get");
+    $router->addRoute("vehicles/:id",  "DELETE",     "VehicleController",        "delete");
+    $router->addRoute("vehicles",      "POST",        "VehicleController",       "create");
+    $router->addRoute("vehicles/:id",  "PUT",        "VehicleController",        "update");
 
    /* var_dump($_GET);
     var_dump($_SERVER);
