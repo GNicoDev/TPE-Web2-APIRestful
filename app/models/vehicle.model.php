@@ -16,7 +16,7 @@ class Vehicle
             return new PDO("mysql:host=" . MYSQL_HOST . ";dbname=" . MYSQL_DB . ";charset=utf8", MYSQL_USER, MYSQL_PASS);
     }
 
-    function getAllVehicles($OrderBy)
+    function getAllVehicles($OrderBy,$orderDir)
     {       
         $sql = 'SELECT * FROM vehiculos';
         if ($OrderBy){
@@ -26,6 +26,8 @@ class Vehicle
                case 'price' : $sql .= ' ORDER BY precio_dia'; break;
             }
         }
+
+        $sql.= " $orderDir";
         $query = $this->db->prepare($sql);
         $query->execute();
 
