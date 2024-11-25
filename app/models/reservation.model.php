@@ -38,6 +38,17 @@ class Reservation
  
     }
 
+    function getReservationByDate($date)
+    {
+
+            $query = $this->db->prepare('SELECT * FROM reservas WHERE fecha_reserva = ?');
+            $query->execute([$date]);
+
+            $books = $query->fetchAll(PDO::FETCH_OBJ);
+            return $books;
+ 
+    }
+
     function getReservationsByVehicle($id)
     {
             $query = $this->db->prepare('SELECT * FROM reservas WHERE id_vehiculo = ?');
@@ -48,25 +59,28 @@ class Reservation
     }
 
 
-    function deleteReservationById($id)
+    function deleteReservaction($id)
     {
 
         $query = $this->db->prepare('DELETE FROM reservas WHERE id = ?');
         $query->execute([$id]);
     }
 
-    function new($fecha, $cantDias, $idVehiculo)
+    function createReservation($date, $daysCount, $idVehicle)
     {
 
         $query = $this->db->prepare('INSERT INTO reservas(fecha_reserva,cant_dias,id_vehiculo) VALUES (?,?,?)');
-        $query->execute([$fecha, $cantDias, $idVehiculo]);
+        $query->execute([$date, $daysCount, $idVehicle]);
+        
+        $id = $this->db->lastInsertId();
+        return $this->getReservationById($id);
     }
 
-    function updateReservation($id, $fecha, $cantDias, $idVehiculo)
+    function updateReservation($id, $date, $daysCount, $idVehicle)
     {
 
         $query = $this->db->prepare("UPDATE reservas SET  fecha_reserva = ?, cant_dias = ?, id_vehiculo = ? WHERE id = ?");
-        $query->execute([$fecha, $cantDias, $idVehiculo, $id]);
+        $query->execute([$date, $daysCount, $idVehicle, $id]);
         $book = $this->getReservationById($id);
         return $book;
     }
