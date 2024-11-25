@@ -19,15 +19,16 @@ class Vehicle
     function getAllVehicles($OrderBy,$orderDir)
     {       
         $sql = 'SELECT * FROM vehiculos';
-        if ($OrderBy){
+        if ($OrderBy!='id'){
             switch($OrderBy){
                case 'year' : $sql .= ' ORDER BY modelo'; break;
                case 'brand' : $sql .= ' ORDER BY marca'; break;
                case 'price' : $sql .= ' ORDER BY precio_dia'; break;
             }
+            if ($orderDir)
+                $sql.= " $orderDir";
         }
-
-        $sql.= " $orderDir";
+        
         $query = $this->db->prepare($sql);
         $query->execute();
 

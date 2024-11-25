@@ -110,7 +110,7 @@ class VehicleController
         } else {
             $vehicle = $this->vehicleModel->updateVehicle($id, $body->marca, $body->modelo, $body->matricula, $body->precio_dia, $body->imagen);
             if ($vehicle)
-                return $this->view->response($vehicle, 201);
+                return $this->view->response($vehicle);
             else
                 return $this->view->response("Error inserting vehicle ", 500);
         }
